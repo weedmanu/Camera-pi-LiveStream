@@ -1,0 +1,144 @@
+	/* un peu de déco */
+	header {
+		background-color: #AADDAA;
+		padding: 1em;
+		margin: 0.2em;
+		border-radius: 1em
+	}
+	
+	#content > nav {
+		background-color: #E3ED9B;
+		padding: 1em;
+		margin: 0.2em;
+		border-radius: 1em
+	}
+	
+	#cam {
+	width:100%;
+	height: 50em;
+	margin-top: 5%;	
+	border:none;
+	}
+	
+.element {
+    margin: auto;
+    text-align: center; 
+}
+
+#date {
+    margin:  auto;
+    text-align: center;
+    font-size     : 200%;
+}
+
+#heure {
+    margin:  auto;
+    text-align: center;
+    font-size     : 400%;        
+}
+
+
+
+#histo, #accueil, #manage {    
+    padding: 10px 40px; 
+    background: #90EE90;
+    color: black;   
+    font-size: 18px;
+    font-style: italic;  
+    border: solid 1px black;  
+    border-radius: 25pt;
+}
+
+form {	
+	font-style: italic;	
+	font-weight: bold;	
+}
+
+fieldset {
+	width:25em;
+}
+
+legend {
+	font-style: italic;	
+	font-weight: bold;	
+	font-size: 3em;
+}
+
+select#lecteur {	
+	background: #90EE90;
+	width:6em;	
+	padding: 10px 20px; 
+	font-style: italic;
+	font-size: 1.5em;
+	font-weight: bold;
+	border:solid 1px black;
+	border-radius: 25pt;
+	margin-left:10%;
+}
+
+
+input#submit { 
+	background: #EF9090;
+	width:6em;
+	padding: 10px 20px; 
+	font-style: italic;
+	font-size: 1.5em;
+	font-weight: bold;
+	border:solid 1px black;
+	border-radius: 25pt;
+	margin-left:10%;
+}
+	
+	/*Ca nous intéresse à partir de là*/
+	header, #content {
+		display: -webkit-box;
+		display: -moz-box;         
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;             /* déclaration flexbox suivant les navigateurs*/
+	}
+
+	/* On adapte les boites */
+	main {
+		background: url("../img/fondserpent.jpeg") no-repeat center black;
+		flex: 1; /* Force l'étirement */
+		overflow: auto; /* scrolling de la div */
+		order: 2 /* position */
+		
+	}
+	
+	nav {
+		order: 1; /* position */
+		width:20%;
+	}
+	
+	/* On force la taille de la page... et on modèle de boite global */
+	body, html {
+		background-color: black;
+		display: flex;
+		flex-direction: column;  /* disposition */
+		height: 100%
+	}
+	nav {
+		display: flex;
+		flex-direction: column;
+}
+
+	/* et on s'arrange pour que le contenu (ligne 2) prenne toute la place */
+	#content {
+		height: 100%
+	}
+
+
+
+	@media all and (max-width: 600px) {
+		#content {
+			flex-flow: column  /* disposition */
+		}
+		nav {
+			order: 1  /* position */
+		}
+		main {
+			order: 2  /* position */
+		}
+	}
