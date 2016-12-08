@@ -6,7 +6,7 @@
 	  
 	    $lecteur = $_POST['lecteur']; 	
 	    
-	    $monfichier = fopen('/home/pi/stream/cam.txt', 'r+');
+	    $monfichier = fopen('/var/www/html/LiveStream/cam.txt', 'r+');
 		$cam = fgets($monfichier); // On lit la première ligne 	    
 	    
 		if ($lecteur == 'play') {	
@@ -71,17 +71,7 @@
 			</fieldset>
 			</div>
 			
-			<div class="element">
-				<a href="../admin/index.php" style="text-decoration:none"><span id="manage">Admin</span></a>
-			</div>
-			
-			<div class="element">
-				<a href="../accueil/index.php" style="text-decoration:none"><span id="accueil">Accueil</span></a>
-			</div>
-			
-			<div class="element">
-				<a href="../histo/index.php" style="text-decoration:none"><span id="histo">Historique</span></a>
-			</div>      
+			 
     </nav>
     
     
