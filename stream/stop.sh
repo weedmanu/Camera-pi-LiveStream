@@ -1,1 +1,3 @@
-killall *.sh raspistill mjpg-streamer
+#!/bin/bash
+killall raspistill mjpg-streamer
+exit
