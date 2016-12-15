@@ -1,6 +1,5 @@
 ###Live-Stream-Camera-Pi###
 
-Avec MJPG-Streamer .
+Avec MJPG-Streamer
 
-##non foctionnel en cours de réalisation ...##
-# Camera-pi-LiveStream
+##Un tutoriel se trouve [ici](http://nasfamilyone.synology.me/tutostreampi)##
