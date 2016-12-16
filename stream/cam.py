@@ -27,7 +27,7 @@ while True:    # boucle infini
 		# on remet 0 dans le fichier cam.txt
 		subprocess.call("sudo cp /home/pi/stream/zero.txt /var/www/html/LiveStream/cam.txt", shell=True)
 	
-	time.sleep(2)	# attent 2s avant de reprendre la boucle
+	time.sleep(1)	# attent 1s avant de reprendre la boucle
 
 
 
