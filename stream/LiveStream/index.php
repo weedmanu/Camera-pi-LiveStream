@@ -35,19 +35,22 @@
 	<title>Streamming</title> <!-- titre -->
 	<link rel="icon" type="image/png" href="cam.png" />
     <script type="text/javascript" src="dateheure.js"></script> <!-- appel de la fonction date et heure javascript --> 
+    <script type="text/javascript" src="jquery.js"></script> <!-- appel de la librairie jquery --> 
     <link rel="stylesheet" href="index.css" /> <!-- appel du thème de la page -->   
+
 </head>   
+
 <body>
 
  <header> 		
 	
 	<div class="element" id="date">
-		<span id="date"></span>
+		
 		<script type="text/javascript">window.onload = date('date');</script>
 	</div>  
 	
 	<div class="element" id="heure">
-		<span id="heure"></span>
+		
 		<script type="text/javascript">window.onload = heure('heure');</script>
 	</div>	
 		
@@ -55,29 +58,45 @@
  
 <div id="content">
 	
-    <main><div id="cam" class="element"><?php echo $affiche;?></div></main>
+    <main>
+		<div id="cam" class="element"><?php echo $affiche;?></div>
+	</main> 
     
     
-    <nav>
-			<div class="element">
-			<fieldset>
-				<legend>Live streaming</legend>
-				<form method="post" action="index.php">  			 
-				   <select name="lecteur" id="lecteur">
-					   <option value="play" selected>play</option>
-					   <option value="stop">stop</option>
-				   </select> 							
-					<input type="submit" name="submit" id="submit" value="valider" />				
-				</form>	
-			</fieldset>
-			</div>
+    <nav>		
 			
 			 
     </nav>
     
     
     
+    <aside>
+		 
+	
+	</aside>
+    
+    
+    
 </div>
+
+<footer>
+	
+	<div class="element">
+			
+				
+				<form id="form" method="post" action="index.php"> 
+					<p><span class="titre">Live streaming :</span>		 
+				    <select name="lecteur" id="lecteur">
+					   <option value="play" selected>play</option>
+					   <option value="stop">stop</option>
+				    </select> 							
+					<input type="submit" name="submit" id="submit" value="valider" />	
+					</p>			
+				</form>	
+			
+			</div>
+	
+</footer>
 
  
  </body>
