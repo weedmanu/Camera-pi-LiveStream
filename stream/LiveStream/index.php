@@ -13,7 +13,8 @@
 
 			$rep = 1; // On met 1
 			fseek($monfichier, 0); // On remet le curseur au début du fichier
-			fputs($monfichier, $rep); // On écrit le nouveau nombre 			
+			fputs($monfichier, $rep); // On écrit le nouveau nombre 	
+			sleep(2);		
 			$affiche = '<iframe id="cam" src="http://192.168.0.75:8080/cam.html" /></iframe>';
 				
 						
