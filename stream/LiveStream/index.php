@@ -35,7 +35,6 @@
 	<title>Streamming</title> <!-- titre -->
 	<link rel="icon" type="image/png" href="cam.png" />
     <script type="text/javascript" src="dateheure.js"></script> <!-- appel de la fonction date et heure javascript --> 
-    <script type="text/javascript" src="jquery.js"></script> <!-- appel de la librairie jquery --> 
     <link rel="stylesheet" href="index.css" /> <!-- appel du thème de la page -->   
 
 </head>   
