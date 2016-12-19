@@ -14,11 +14,24 @@ while True:    # boucle infini
 	
 
 	if g == 1:	# si g = 1 donc.
-		
-		# on lance la prise de photos.		
-		subprocess.call("sh /home/pi/stream/play.sh", shell=True)			
-		# on remet 0 dans le fichier cam.txt
-		subprocess.call("sudo cp /home/pi/stream/zero.txt /var/www/html/LiveStream/cam.txt", shell=True)
+		# on verifie si raspistill est deja lance
+		existe = False
+		for p in psutil.process_iter():
+			try:
+					pi = p.as_dict(attrs=['pid', 'name'])
+			except:
+					pass
+			else:
+					if pi['name'] == 'raspistill':
+						existe = True
+						# Pas besoin d'aller plus loin
+						break
+		# sinon on le lance	dans un process en parallele et on continu		
+		if not existe:
+			# on lance la prise de photos.		
+			subprocess.call("sh /home/pi/stream/play.sh", shell=True)			
+			# on remet 0 dans le fichier cam.txt
+			subprocess.call("sudo cp /home/pi/stream/zero.txt /var/www/html/LiveStream/cam.txt", shell=True)
 		
 	if g == 2:	# si g = 2 donc.
 		
@@ -28,7 +41,6 @@ while True:    # boucle infini
 		subprocess.call("sudo cp /home/pi/stream/zero.txt /var/www/html/LiveStream/cam.txt", shell=True)
 	
 	time.sleep(1)	# attent 1s avant de reprendre la boucle
-
 
 
     
