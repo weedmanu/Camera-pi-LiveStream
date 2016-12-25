@@ -1,5 +1,7 @@
 <?php 
 	
+$srv_addr = "http://${_SERVER['SERVER_ADDR']}:8080";
+
   // Si le tableau $_POST existe alors le formulaire a été envoyé
   if(!empty($_POST))
   {
@@ -15,7 +17,7 @@
 			fseek($monfichier, 0); // On remet le curseur au début du fichier
 			fputs($monfichier, $rep); // On écrit le nouveau nombre 	
 			sleep(2);		
-			$affiche = '<iframe id="cam" src="http://192.168.0.75:8080/cam.html" /></iframe>';
+			$affiche = "<iframe id='cam' src='$srv_addr/cam.html' /></iframe>";
 				
 						
 			} else  { 	
@@ -27,6 +29,7 @@
 				 										
 				}			
 }
+
 ?>
 
 <!DOCTYPE html> 
@@ -63,7 +66,7 @@
     
     
     <nav>		
-			
+			<?php echo $srv_addr; ?>
 			 
     </nav>
     
