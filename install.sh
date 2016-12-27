@@ -1,25 +1,25 @@
 #!/bin/bash
-
+ 
 MAJ=(
 'apt-get update' 
 'apt-get upgrade'
 )
-whiptail --title "Vérification et installation des mises à jour" --gauge "Veuillez patienter pendant la mise à jour" 10 75 0 < <(
+whiptail --title "Vérification et installation des mises à jour" --gauge "Veuillez patienter pendant la mise à jour, cela peut être long" 10 75 0 < <(
    n=${#MAJ[*]}; 
    i=0
    for f in "${MAJ[@]}"
    do
-	  $f -y >>instal.log 2>&1
+	  $f -y >>/dev/null 2>&1
       avancement=$(( 100*(++i)/n ))
-      echo "${avancement}%" >>instal.log
+      
             
 cat <<EOF
 XXX
 $avancement
-Commande en cours : "$f"...
+Commande effectuée : "$f"...
 XXX
 EOF
-  
+   
    done
 )
 
@@ -38,19 +38,19 @@ PROG=(
 'apt-get install libapache2-mod-php5' 
 'apt-get install php5-mysql'
 )
-whiptail --gauge "Installation des programmes, veuillez patienter..." 10 75 0 < <(
+whiptail --title "Installation des programmes" --gauge "Installation des programmes, veuillez patienter..." 10 75 0 < <(
    n=${#PROG[*]}; 
    i=0
    for f in "${PROG[@]}"
    do
-	  $f -y >>instal.log 2>&1
+	  $f -y >>/dev/null 2>&1
       avancement=$(( 100*(++i)/n ))
-      echo "${avancement}%" >>instal.log
+      
       
 cat <<EOF
 XXX
 $avancement
-Commande en cours : "$f"...
+Commande effectuée : "$f"...
 XXX
 EOF
    
@@ -65,58 +65,59 @@ whiptail --title "Installation des librairies python" --gauge "Installation des 
    i=0
    for f in "${LIB[@]}"
    do
-	  $f >>instal.log 2>&1
+	  $f >>/dev/null 2>&1
       avancement=$(( 100*(++i)/n ))
-      echo "${avancement}%" >>instal.log
+      
       
 cat <<EOF
 XXX
 $avancement
-Commande en cours : "$f"...
+Commande effectuée : "$f"...
 XXX
 EOF
   
    done
 )
 
-ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
-svn co https://svn.code.sf.net/p/mjpg-streamer/code/ >>instal.log 2>&1
-cd code/mjpg-streamer
-make mjpg_streamer input_file.so output_http.so >>instal.log 2>&1
-cp mjpg_streamer /usr/local/bin
-cp output_http.so input_file.so /usr/local/lib/
-cp -R www /usr/local/www
-rm -r /home/pi/code
-cp /usr/local/www/stream_simple.html /usr/local/www/cam.html
-cd /var/www/html/
-rm index.html
-chown www-data:pi /var/www/html/
-chmod 770 /var/www/html/
-cd /home/pi
-
-URL=(https://github.com/weedmanu/Camera-pi-LiveStream.git)
-whiptail --title "pages web et scripts" --gauge "Téléchargement de la page web et des scripts, veuillez patienter..." 10 75 0 < <(
-   n=${#URL[*]}; 
+INSTALL=(
+'ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h'
+'svn co https://svn.code.sf.net/p/mjpg-streamer/code/'
+'cd code/mjpg-streamer'
+'make mjpg_streamer input_file.so output_http.so' 
+'cp mjpg_streamer /usr/local/bin'
+'cp output_http.so input_file.so /usr/local/lib/'
+'cp -R www /usr/local/www'
+'rm -r /home/pi/code'
+'cp /usr/local/www/stream_simple.html /usr/local/www/cam.html'
+'cd /var/www/html/'
+'rm index.html'
+'chown www-data:pi /var/www/html/'
+'chmod 770 /var/www/html/'
+'cd /home/pi'
+'git clone https://github.com/weedmanu/Camera-pi-LiveStream.git'
+'mv Camera-pi-LiveStream/stream -t /home/pi/'
+'mv /home/pi/stream/LiveStream -t /var/www/html/'
+'rm -r /home/pi/Camera-pi-LiveStream'
+)
+whiptail --title "pages web et scripts" --gauge "Installation de la page web et des scripts, veuillez patienter..." 10 75 0 < <(
+   n=${#INSTALL[*]}; 
    i=0
-   for f in "${URL[@]}"
+   for f in "${INSTALL[@]}"
    do
-      git clone $f  >>instal.log 2>&1
+      $f  >>/dev/null 2>&1
       avancement=$(( 100*(++i)/n ))
-      echo "${avancement}%" >>instal.log
+      
       
 cat <<EOF
 XXX
 $avancement
-Commande en cours : "$f"...
+Commande effectuée : "$f"...
 XXX
 EOF
   
    done
 )
 
-mv Camera-pi-LiveStream/stream -t /home/pi/
-mv /home/pi/stream/LiveStream -t /var/www/html/
-rm -r /home/pi/Camera-pi-LiveStream
 cp /etc/rc.local /home/pi/test
 sed -i '$d' test
 echo "python /home/pi/stream/cam.py &" >> test
@@ -125,20 +126,22 @@ echo "exit 0" >> test
 mv test /etc/rc.local
 chown -R www-data:pi /var/www/html/
 chmod -R 770 /var/www/html/
+chown -R pi /home/pi/stream/
 python /home/pi/stream/cam.py &
+
 CONNECTION=$(whiptail --title "Connexion" --radiolist \
 "Quelle connection utilisez vous ?" 15 75 4 \
 "wlan0" "le Wifi" ON \
 "eth0" "l'ethernet" OFF 3>&1 1>&2 2>&3) 
+
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
-    monip=`ifconfig $CONNECTION | grep "inet adr" | sed 's/.*adr:\([0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\).*/\1/'`
+    monip=`ifconfig $CONNECTION | grep "inet addr" | cut -f2 -d: | awk '{print $1}'`
     whiptail --title "FIN" --msgbox "Ouvrez ce lien: http://${monip}/LiveStream/  pour voir le résultat \net cliquez OK pour fermer le programme d installation." 10 75
 else
     echo "Vous avez annulé, pour voir la page web : http://adresse_ip_du_pi/LiveStream/"
 fi
-chown -R pi /home/pi/stream
-chmod -R 770 /home/pi/stream
 rm install.sh
 exit
+
 
