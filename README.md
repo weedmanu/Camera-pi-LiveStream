@@ -2,7 +2,8 @@
 
 ##Avec MJPG-Streamer##
 
-###Un tutoriel se trouve [ici](http://nasfamilyone.synology.me/tutostreampi) et il y a également un fichier d'installation automatique:###
+###Un tutoriel se trouve [ici](http://nasfamilyone.synology.me/tuto&co/tutoriels/tutostreampi) et il y a également un fichier d'installation automatique:###
+
          install.sh
 
 
