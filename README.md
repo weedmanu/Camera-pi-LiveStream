@@ -7,7 +7,7 @@ Un tutoriel se trouve [ici](https://nasfamilyone.synology.me/tuto&co/tutoriels/t
 
 **install.sh**
 
-il suffit de copier ce fichier dans /home/pi/ où de le créer et d'y copier le code , puis de le rendre exécutable :
+il suffit de copier ce fichier dans /home/pi/ où de le créer et d'y copier le code, puis de le rendre exécutable :
 
 **chmod +x install.sh**
 
